@@ -1,0 +1,22 @@
+
+#开启伪静态功能
+RewriteEngine On
+ 
+#绑定所需的二级域名
+RewriteCond %{HTTP_HOST} ^(www.)?demo.hydxds.com$
+ 
+#绑定需指向的二级目录
+RewriteCond %{REQUEST_URI} !^/demo/
+ 
+#下面两行不动
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+ 
+#改为要绑定的二级目录
+RewriteRule ^(.*)$ /demo/$1
+ 
+#绑定二级域名
+RewriteCond %{HTTP_HOST} ^(www.)?demo.hydxds.com$
+ 
+# join二级目录 后面是首页文件demo.html,join.html, index.html,index.php……(根据你的实际情况而定)
+RewriteRule ^(/)?$ demo/index.php [L]
